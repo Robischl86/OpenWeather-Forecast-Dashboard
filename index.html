@@ -37,24 +37,15 @@
             <div class="lead" id="uvIndex" style="display: inline;"></div>
             <div id="uvAmount" style="display: inline; border-radius: 5px;"></div>
             <hr class="my-4">
-            <p>Search for a city and see its five-day forecast!</p>
+            <p>Enter city name below to find its current weather and five-day forecast.</p>
             <input class="form-control" id="cityInput" type="text" placeholder="City Name">
             <br>
             <a class="btn btn-primary btn-lg" id="getWeatherBtn" href="#" role="button">Find City</a>
         </div>
-
-
-<div class="holder" id="forecastHolder"></div>
-
-<div class="holder" id="forecastHolder"></div>
-
-<div class="holder" id="forecastHolder"></div>
-
-<div class="holder" id="forecastHolder"></div>
-
-
-
-       </div>
+        <div id="forecastHolder"></div>
+        <br>
+      </div>
+      <footer></footer>
        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
        <script type="text/javascript">
 
@@ -99,7 +90,7 @@ $("#getWeatherBtn").on("click", function() {
         let temp = response.main.temp;
         let F = Math.round((temp - 273.15) * 1.80 + 32);
         console.log(F);
-        $("#temperature").text("Temperature: " + F +"℉");
+        $("#temperature").text("Temperature: " + F + "℉");
 
         //HUMIDITY
         let humidity = response.main.humidity;
@@ -147,25 +138,42 @@ $("#getWeatherBtn").on("click", function() {
 
           //$("div.holder").css({"border-style": "solid", "border-color": "black"})
 
-          for (let i = 8; i < 40; i += 8) {
+          for (let i = 7; i < 40; i += 8) {
 
-              $(document).append
+            //Creating Div to store the forecast information
+            let forecastDiv = $("<div class='forecastDiv'>");
+            //document.append(forecastDiv);
+            //Storing the forecast data
 
-              forecastDate = moment(response.list[i].dt_txt).format('l');
-              $("h4.forecastDate").text(forecastDate);
+              // Establishing the forecast date
+              let forecastDate = moment(response.list[i].dt_txt).format('l');
+              let ForecastHeader = $("<h3>").text(forecastDate)
               console.log(forecastDate);
+              forecastDiv.append(ForecastHeader);
 
-              forecastImage = response.list[i].weather[0].icon;
-              console.log(forecastImage);
+              // Establishing the forecast icon
+              let forecastImageID = response.list[i].weather[0].icon;
+              console.log(forecastImageID);
+              let forecastIconURL = "https://openweathermap.org/img/wn/" + forecastImageID + "@2x.png";
+              console.log(forecastIconURL);
+              let forecastImageIcon = $("<img>").attr("src", forecastIconURL);
+              forecastDiv.append(forecastImageIcon);
 
-              forecastTemp = response.list[i].main.temp;
-              $("p.forecastTemp").text("Temperature: "+ forecastTemp);
-              console.log(forecastTemp);
+              // Establishing the forecast temperature
+              let forecastKelvin = response.list[i].main.temp;
+              let forecastTemp = Math.round((forecastKelvin - 273.15) * 1.80 + 32);
+              let PTemp = $("<h5>").text("Temp: " + forecastTemp  + "℉")
+              //$("p.forecastTemp").text("Temperature: "+ forecastTemp);
+              console.log(forecastTemp  + "℉");
+              forecastDiv.append(PTemp);
 
-              forecastHumidity = response.list[i].main.humidity;
-              $("p.forecastHumidity").text("Humidity: "+ forecastHumidity);
-              console.log(forecastHumidity);
+              let forecastHumidity = response.list[i].main.humidity;
+              let PHumidity = $("<h5>").text("Humidity: " + forecastHumidity + "%")
+              //$("p.forecastHumidity").text("Humidity: "+ forecastHumidity);
+              console.log(forecastHumidity + "%");
+              forecastDiv.append(PHumidity);
 
+              $("#forecastHolder").append(forecastDiv);
               console.log("-------------------------")
 
 

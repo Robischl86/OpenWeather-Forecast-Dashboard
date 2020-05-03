@@ -1,0 +1,9 @@
+.forecastDiv {
+    background-color: deepskyblue;
+    border-style: solid;
+    border-color: black;
+    border-radius: 10px;
+    width: 20%;
+    display: inline-block;
+    padding-left: 10px;
+}
