@@ -10,6 +10,14 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+
+    <script src="moment.js"></script>
+    <script>
+        moment().format();
+        console.log(moment());
+        console.log(moment().format("MMM Do YYYY")); 
+    </script>
+
     <!--<script src="script.js" type="text/javascript"></script>-->
     <title>Levi's Weather App</title>
   </head>
@@ -18,31 +26,44 @@
         <span class="navbar-brand mb-0 h1">Levi's Weather App</span>
       </nav>
       <div class="container">
-        <div class="jumbotron">
-            <h1 class="display-4" id="cityName"></h1>
+        <div class="jumbotron" style="border-style: solid; background-color: white;">
+            <h3 id="currentDate"></h3>
+            <h2 class="display-4" id="cityName"></h2>
+            <img id="currentWeatherImg">
+            <p class="lead" id="currentWeatherDesc"></p>
             <p class="lead" id="temperature"></p>
             <p class="lead" id="humidity"></p>
             <p class="lead" id="windspeed"></p>
-            <p class="lead" id="uvIndex">
-            </p>
+            <div class="lead" id="uvIndex" style="display: inline;"></div>
+            <div id="uvAmount" style="display: inline; border-radius: 5px;"></div>
             <hr class="my-4">
             <p>Search for a city and see its five-day forecast!</p>
             <input class="form-control" id="cityInput" type="text" placeholder="City Name">
             <br>
             <a class="btn btn-primary btn-lg" id="getWeatherBtn" href="#" role="button">Find City</a>
         </div>
+
+
+<div class="holder" id="forecastHolder"></div>
+
+<div class="holder" id="forecastHolder"></div>
+
+<div class="holder" id="forecastHolder"></div>
+
+<div class="holder" id="forecastHolder"></div>
+
+
+
        </div>
        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
        <script type="text/javascript">
 
+//DISPLAYING CURRENT DATE
+$("#currentDate").text(moment().format("MMM Do YYYY"));
 
-
+$(document).ready(function(){
+//GET WEATHER FUNCTION "on click"
 $("#getWeatherBtn").on("click", function() {
-      //let cityNameEl = document.querySelector("#cityName");
-      //let tempEl = document.querySelector("#temperature");
-      //let humidityEl = document.querySelector("#humidity");
-      //let windSpeedEl = document.querySelector("#windspeed");
-      //let uvIndexEl = document.querySelector("#uvIndex");
 
       let cityInput = $("#cityInput").val();
       var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" +
@@ -60,30 +81,46 @@ $("#getWeatherBtn").on("click", function() {
         // Create CODE HERE to log the resulting object
         console.log(response);
         
+        //CITY NAME
         $("#cityName").text(response.name)
-        // Create CODE HERE to calculate the temperature (converted from Kelvin)
+
+        //WEATHER ICON
+        let weatherIcon = response.weather[0].icon;
+        console.log(weatherIcon);
+        $("#currentWeatherImg").attr("src", "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
+
+
+        //WEATHER DESCRIPTION #currentWeatherDesc
+        let weatherDesc = response.weather[0].description;
+        console.log(weatherDesc)
+        $("#currentWeatherDesc").text(weatherDesc)
+
+        //TEMPERATURE
         let temp = response.main.temp;
         let F = Math.round((temp - 273.15) * 1.80 + 32);
         console.log(F);
         $("#temperature").text("Temperature: " + F +"℉");
 
+        //HUMIDITY
         let humidity = response.main.humidity;
         console.log(humidity)
         $("#humidity").text("Humidity: " + humidity + "%");
 
+        //WIND SPEED
         let wind = response.wind.speed;
         console.log(wind);
         $("#windspeed").text("Wind Speed: " + wind + " MPH");
 
+        //UV INDEX
         let lon = response.coord.lon;
         console.log(lon);
         let lat = response.coord.lat;
         console.log(lat);
         let uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi?appid=3e36a353a513c2197f90f8494af1060a&lat=" + lat + "&lon=" + lon;
         console.log(uvIndexURL);
+        $("#uvIndex").text("UV Index: ");
 
-
-
+        //FORECAST
         $.ajax({
           url: uvIndexURL,
           method: "GET"
@@ -92,16 +129,53 @@ $("#getWeatherBtn").on("click", function() {
 
           let uvAmount = response.value;
           console.log(uvAmount)
+          $("#uvAmount").text(uvAmount)
+          console.log("-------------------------")
 
           if (uvAmount > 6) {
-            $("#uvIndex").text("UV Index: " + uvAmount);
-            $("uvAmount").css("background-color", "red")
+            $("#uvAmount").css({"background-color": "red", "font-weight": "bold"})
           }
-
           else {
-            $("#uvIndex").text("UV Index: " + uvAmount);
+            $("#uvAmount").css({"background-color": "", "font-weight": "bold"})
           }
         });
+
+        $.ajax({
+          url: forecastURL,
+          method: "GET"
+        }).then(function(response) {
+
+          //$("div.holder").css({"border-style": "solid", "border-color": "black"})
+
+          for (let i = 8; i < 40; i += 8) {
+
+
+              forecastDate = moment(response.list[i].dt_txt).format('l');
+              $("h4.forecastDate").text(forecastDate);
+              console.log(forecastDate);
+
+              forecastImage = response.list[i].weather[0].icon;
+              console.log(forecastImage);
+
+              forecastTemp = response.list[i].main.temp;
+              $("p.forecastTemp").text("Temperature: "+ forecastTemp);
+              console.log(forecastTemp);
+
+              forecastHumidity = response.list[i].main.humidity;
+              $("p.forecastHumidity").text("Humidity: "+ forecastHumidity);
+              console.log(forecastHumidity);
+
+              console.log("-------------------------")
+
+
+          };
+
+
+
+        });
+
+
+        
       });
 
 
@@ -109,7 +183,7 @@ $("#getWeatherBtn").on("click", function() {
 
 
     });
-
+  });
 
        </script>
   </body>
