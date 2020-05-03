@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!--<script src="script.js" type="text/javascript"></script>-->
+    <title>Levi's Weather App</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Levi's Weather App</span>
+      </nav>
+      <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4" id="cityName"></h1>
+            <p class="lead" id="temperature"></p>
+            <p class="lead" id="humidity"></p>
+            <p class="lead" id="windspeed"></p>
+            <p class="lead" id="uvIndex">
+            </p>
+            <hr class="my-4">
+            <p>Search for a city and see its five-day forecast!</p>
+            <input class="form-control" id="cityInput" type="text" placeholder="City Name">
+            <br>
+            <a class="btn btn-primary btn-lg" id="getWeatherBtn" href="#" role="button">Find City</a>
+        </div>
+       </div>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       <script type="text/javascript">
+
+
+
+$("#getWeatherBtn").on("click", function() {
+      //let cityNameEl = document.querySelector("#cityName");
+      //let tempEl = document.querySelector("#temperature");
+      //let humidityEl = document.querySelector("#humidity");
+      //let windSpeedEl = document.querySelector("#windspeed");
+      //let uvIndexEl = document.querySelector("#uvIndex");
+
+      let cityInput = $("#cityInput").val();
+      var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" +
+      cityInput + "&appid=3e36a353a513c2197f90f8494af1060a";
+      console.log(queryURL)
+
+      let forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityInput + "&appid=3e36a353a513c2197f90f8494af1060a"
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(response) {
+
+
+        // Create CODE HERE to log the resulting object
+        console.log(response);
+        
+        $("#cityName").text(response.name)
+        // Create CODE HERE to calculate the temperature (converted from Kelvin)
+        let temp = response.main.temp;
+        let F = Math.round((temp - 273.15) * 1.80 + 32);
+        console.log(F);
+        $("#temperature").text("Temperature: " + F +"℉");
+
+        let humidity = response.main.humidity;
+        console.log(humidity)
+        $("#humidity").text("Humidity: " + humidity + "%");
+
+        let wind = response.wind.speed;
+        console.log(wind);
+        $("#windspeed").text("Wind Speed: " + wind + " MPH");
+
+        let lon = response.coord.lon;
+        console.log(lon);
+        let lat = response.coord.lat;
+        console.log(lat);
+        let uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi?appid=3e36a353a513c2197f90f8494af1060a&lat=" + lat + "&lon=" + lon;
+        console.log(uvIndexURL);
+
+
+
+        $.ajax({
+          url: uvIndexURL,
+          method: "GET"
+        }).then(function(response) {
+
+
+          let uvAmount = response.value;
+          console.log(uvAmount)
+
+          if (uvAmount > 6) {
+            $("#uvIndex").text("UV Index: " + uvAmount);
+            $("uvAmount").css("background-color", "red")
+          }
+
+          else {
+            $("#uvIndex").text("UV Index: " + uvAmount);
+          }
+        });
+      });
+
+
+
+
+
+    });
+
+
+       </script>
+  </body>
+</html>
