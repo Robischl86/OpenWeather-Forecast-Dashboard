@@ -66,11 +66,11 @@ $(document).ready(function(){
 $("#getWeatherBtn").on("click", function() {
 
       let cityInput = $("#cityInput").val();
-      var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" +
+      var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
       cityInput + "&appid=3e36a353a513c2197f90f8494af1060a";
       console.log(queryURL)
 
-      let forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityInput + "&appid=3e36a353a513c2197f90f8494af1060a"
+      let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityInput + "&appid=3e36a353a513c2197f90f8494af1060a"
 
       $.ajax({
         url: queryURL,
@@ -87,7 +87,7 @@ $("#getWeatherBtn").on("click", function() {
         //WEATHER ICON
         let weatherIcon = response.weather[0].icon;
         console.log(weatherIcon);
-        $("#currentWeatherImg").attr("src", "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
+        $("#currentWeatherImg").attr("src", "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
 
 
         //WEATHER DESCRIPTION #currentWeatherDesc
@@ -116,7 +116,7 @@ $("#getWeatherBtn").on("click", function() {
         console.log(lon);
         let lat = response.coord.lat;
         console.log(lat);
-        let uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi?appid=3e36a353a513c2197f90f8494af1060a&lat=" + lat + "&lon=" + lon;
+        let uvIndexURL = "https://api.openweathermap.org/data/2.5/uvi?appid=3e36a353a513c2197f90f8494af1060a&lat=" + lat + "&lon=" + lon;
         console.log(uvIndexURL);
         $("#uvIndex").text("UV Index: ");
 
@@ -149,6 +149,7 @@ $("#getWeatherBtn").on("click", function() {
 
           for (let i = 8; i < 40; i += 8) {
 
+              $(document).append
 
               forecastDate = moment(response.list[i].dt_txt).format('l');
               $("h4.forecastDate").text(forecastDate);
