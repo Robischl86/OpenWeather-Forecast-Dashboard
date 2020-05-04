@@ -7,3 +7,19 @@
     display: inline-block;
     padding-left: 10px;
 }
+
+#cityInput {
+    width: 30%;
+}
+
+#forecastHolder {
+    margin-top: 20px;
+}
+
+.footer {
+    padding: 30px;
+    clear: both;
+    color: darkgrey;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+}
