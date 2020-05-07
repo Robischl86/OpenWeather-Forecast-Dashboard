@@ -14,11 +14,11 @@
     <script src="moment.js"></script>
     <script>
         moment().format();
-        console.log(moment());
-        console.log(moment().format("MMM Do YYYY")); 
+        //console.log(moment());
+        //console.log(moment().format("MMM Do YYYY")); 
     </script>
 
-    <title>Levi's Weather App</title>
+    <title>Levi's Weather Dashboard</title>
   </head>
   <body>
     <nav class="navbar navbar-light bg-light justify-content-center">
@@ -28,6 +28,7 @@
       </nav>
       <div class="container">
         <div class="jumbotron" style="border-style: solid; background-color: white;">
+          
           <!--SECTION FOR CURRENT WEATHER-->
           <section id="currentWeatherHolder">
             <h3 id="currentDate"></h3>
@@ -73,7 +74,7 @@ $("#getWeatherBtn").on("click", function() {
       let cityInput = $("#cityInput").val();
       var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
       cityInput + "&appid=3e36a353a513c2197f90f8494af1060a";
-      console.log(queryURL)
+      //console.log(queryURL)
 
       let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityInput + "&appid=3e36a353a513c2197f90f8494af1060a"
   
@@ -84,45 +85,45 @@ $("#getWeatherBtn").on("click", function() {
 
 
         // Create CODE HERE to log the resulting object
-        console.log(response);
+        //console.log(response);
         
         //CITY NAME
         $("#cityName").text(response.name)
 
         //WEATHER ICON
         let weatherIcon = response.weather[0].icon;
-        console.log(weatherIcon);
+        //console.log(weatherIcon);
         $("#currentWeatherImg").attr("src", "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
 
 
         //WEATHER DESCRIPTION #currentWeatherDesc
         let weatherDesc = response.weather[0].description;
-        console.log(weatherDesc)
+        //console.log(weatherDesc)
         $("#currentWeatherDesc").text(weatherDesc)
 
         //TEMPERATURE
         let temp = response.main.temp;
         let F = Math.round((temp - 273.15) * 1.80 + 32);
-        console.log(F);
+        //console.log(F);
         $("#temperature").text("Temperature: " + F + "℉");
 
         //HUMIDITY
         let humidity = response.main.humidity;
-        console.log(humidity)
+        //console.log(humidity)
         $("#humidity").text("Humidity: " + humidity + "%");
 
         //WIND SPEED
         let wind = response.wind.speed;
-        console.log(wind);
+        //console.log(wind);
         $("#windspeed").text("Wind Speed: " + wind + " MPH");
 
         //UV INDEX
         let lon = response.coord.lon;
-        console.log(lon);
+        //console.log(lon);
         let lat = response.coord.lat;
-        console.log(lat);
+        //console.log(lat);
         let uvIndexURL = "https://api.openweathermap.org/data/2.5/uvi?appid=3e36a353a513c2197f90f8494af1060a&lat=" + lat + "&lon=" + lon;
-        console.log(uvIndexURL);
+        //console.log(uvIndexURL);
         $("#uvIndex").text("UV Index: ");
 
         //GETING UV AMOUNT
@@ -132,9 +133,9 @@ $("#getWeatherBtn").on("click", function() {
         }).then(function(response) {
 
           let uvAmount = response.value;
-          console.log(uvAmount)
+          //console.log(uvAmount)
           $("#uvAmount").text(uvAmount)
-          console.log("-------------------------")
+          //console.log("-------------------------")
 
           if (uvAmount > 6) {
             $("#uvAmount").css({"background-color": "red", "font-weight": "bold"})
@@ -149,8 +150,8 @@ $("#getWeatherBtn").on("click", function() {
           url: forecastURL,
           method: "GET"
         }).then(function(response) {
-          console.log(moment(response.list[3].dt_txt).format('LTS'))
-          console.log("-------------------------")
+          //console.log(moment(response.list[3].dt_txt).format('LTS'))
+          //console.log("-------------------------")
 
 
           for (let i = 0; i < 40; i++) {
@@ -166,8 +167,8 @@ $("#getWeatherBtn").on("click", function() {
               let forecastHour = moment(response.list[i].dt_txt).format('LTS');
               let ForecastHeader = $("<h3>").text(forecastDate);
               forecastDiv.append(ForecastHeader);
-              console.log(forecastDate);
-              console.log(forecastHour);
+              //console.log(forecastDate);
+              //console.log(forecastHour);
 
               // Establishing the forecast icon
               let forecastImageID = response.list[i].weather[0].icon;
@@ -175,8 +176,8 @@ $("#getWeatherBtn").on("click", function() {
               let forecastImageIcon = $("<img>").attr("src", forecastIconURL);
               forecastDiv.append(forecastImageIcon);
 
-              console.log("Image ID " + forecastImageID);
-              console.log(forecastIconURL);
+              //console.log("Image ID " + forecastImageID);
+              //console.log(forecastIconURL);
 
               // Establishing the forecast temperature
               let forecastKelvin = response.list[i].main.temp;
@@ -184,18 +185,18 @@ $("#getWeatherBtn").on("click", function() {
               let PTemp = $("<h5>").text("Temp: " + forecastTemp  + "℉")
               forecastDiv.append(PTemp);
 
-              console.log(forecastTemp  + "℉");
+              //console.log(forecastTemp  + "℉");
 
               // Establishing the forecast humidity
               let forecastHumidity = response.list[i].main.humidity;
               let PHumidity = $("<h5>").text("Humidity: " + forecastHumidity + "%")
               forecastDiv.append(PHumidity);
 
-              console.log(forecastHumidity + "%");
+              //console.log(forecastHumidity + "%");
 
               // Appending the forecast div
               $("#forecastHolder").append(forecastDiv);
-              console.log("-------------------------")
+              //console.log("-------------------------")
             
 
           };
