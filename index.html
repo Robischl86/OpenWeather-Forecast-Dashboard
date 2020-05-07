@@ -18,13 +18,12 @@
         console.log(moment().format("MMM Do YYYY")); 
     </script>
 
-    <!--<script src="script.js" type="text/javascript"></script>-->
     <title>Levi's Weather App</title>
   </head>
   <body>
     <nav class="navbar navbar-light bg-light justify-content-center">
         <span>
-          <h1>Levi's Weather App</h1>
+          <h1>Levi's Weather Dashboard</h1>
         </span>
       </nav>
       <div class="container">
@@ -77,7 +76,7 @@ $("#getWeatherBtn").on("click", function() {
       console.log(queryURL)
 
       let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityInput + "&appid=3e36a353a513c2197f90f8494af1060a"
-
+  
       $.ajax({
         url: queryURL,
         method: "GET"
@@ -145,56 +144,63 @@ $("#getWeatherBtn").on("click", function() {
           }
         });
 
-        //FORECAST
+        //FORECAST API
         $.ajax({
           url: forecastURL,
           method: "GET"
         }).then(function(response) {
+          console.log(moment(response.list[3].dt_txt).format('LTS'))
+          console.log("-------------------------")
 
-          //$("div.holder").css({"border-style": "solid", "border-color": "black"})
 
-          for (let i = 7; i < 40; i += 8) {
+          for (let i = 0; i < 40; i++) {
 
             //Creating Div to store the forecast information
             let forecastDiv = $("<div class='forecastDiv'>");
-            //document.append(forecastDiv);
-            //Storing the forecast data
+
+              //If statement so that function only shows the forecast conditions on 3pm each day.
+              if (moment(response.list[i].dt_txt).format('LTS') == "3:00:00 PM") {
 
               // Establishing the forecast date
               let forecastDate = moment(response.list[i].dt_txt).format('l');
-              let ForecastHeader = $("<h3>").text(forecastDate)
-              console.log(forecastDate);
+              let forecastHour = moment(response.list[i].dt_txt).format('LTS');
+              let ForecastHeader = $("<h3>").text(forecastDate);
               forecastDiv.append(ForecastHeader);
+              console.log(forecastDate);
+              console.log(forecastHour);
 
               // Establishing the forecast icon
               let forecastImageID = response.list[i].weather[0].icon;
-              console.log(forecastImageID);
               let forecastIconURL = "https://openweathermap.org/img/wn/" + forecastImageID + "@2x.png";
-              console.log(forecastIconURL);
               let forecastImageIcon = $("<img>").attr("src", forecastIconURL);
               forecastDiv.append(forecastImageIcon);
+
+              console.log("Image ID " + forecastImageID);
+              console.log(forecastIconURL);
 
               // Establishing the forecast temperature
               let forecastKelvin = response.list[i].main.temp;
               let forecastTemp = Math.round((forecastKelvin - 273.15) * 1.80 + 32);
               let PTemp = $("<h5>").text("Temp: " + forecastTemp  + "℉")
-              //$("p.forecastTemp").text("Temperature: "+ forecastTemp);
-              console.log(forecastTemp  + "℉");
               forecastDiv.append(PTemp);
 
+              console.log(forecastTemp  + "℉");
+
+              // Establishing the forecast humidity
               let forecastHumidity = response.list[i].main.humidity;
               let PHumidity = $("<h5>").text("Humidity: " + forecastHumidity + "%")
-              //$("p.forecastHumidity").text("Humidity: "+ forecastHumidity);
-              console.log(forecastHumidity + "%");
               forecastDiv.append(PHumidity);
 
+              console.log(forecastHumidity + "%");
+
+              // Appending the forecast div
               $("#forecastHolder").append(forecastDiv);
               console.log("-------------------------")
-
+            
 
           };
 
-
+        };
 
         });
 
