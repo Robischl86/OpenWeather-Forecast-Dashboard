@@ -1,5 +1,5 @@
 # OpenWeather-Forecast-Dashboard
-I started this assignment by filling out the HTML and determining the id's attached to specific tags.
+This is a weather dashboard that pulls data from the OpenWeather API and displays current weather information and five-day forecast for any city. I started this assignment by filling out the HTML and determining the id's attached to specific tags.
 I then created the getWeather() function, which would be triggered by the #getWeatherBtn.
 
 Within the getWeather() function, I set up my JQUERY use the input from the #cityInput form to do city-searches using the OpenWeather API for the current weather. The response items would then be made into the text value for their respective paragraph tags (temperature, humidity, ie.).
