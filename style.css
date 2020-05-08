@@ -27,3 +27,7 @@
 p {
     font-size: large;
 }
+
+p.thick {
+    font-weight: 350;
+}
