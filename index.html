@@ -22,8 +22,8 @@
     <script src="moment.js"></script>
     <script>
         moment().format();
-        //console.log(moment());
-        //console.log(moment().format("MMM Do YYYY")); 
+        ////console.log(moment());
+        ////console.log(moment().format("MMM Do YYYY")); 
     </script>
 
     <title>Levi's Weather Dashboard</title>
@@ -96,74 +96,72 @@
 
                 forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityInput + "&appid=3e36a353a513c2197f90f8494af1060a"
 
-
-//              AJAX    ////////////////////////////////////////////////////////////////////////////
+//              AJAX    
                 $.ajax({
                     url: queryURL,
                     method: "GET"
                 }).then(function (response) {
 
                     // Create CODE HERE to log the resulting object
-                    //console.log(response);
+                    ////console.log(response);
 
                     //CITY NAME
-                    console.log(response.name)
+                    //console.log(response.name)
                     $("#cityName").text(response.name)
 
                     //WEATHER ICON
                     let weatherIcon = response.weather[0].icon;
-                    //console.log(weatherIcon);
+                    ////console.log(weatherIcon);
                     $("#currentWeatherImg").attr("src", "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
 
                     //WEATHER DESCRIPTION #currentWeatherDesc
                     let weatherDesc = response.weather[0].description;
-                    //console.log(weatherDesc)
+                    ////console.log(weatherDesc)
                     $("#currentWeatherDesc").text(weatherDesc)
 
                     //TEMPERATURE
                     let temp = response.main.temp;
                     let F = Math.round((temp - 273.15) * 1.80 + 32);
-                    //console.log(F);
+                    ////console.log(F);
                     $("#temperature").text("Temperature: " + F + "℉");
 
                     //HUMIDITY
                     let humidity = response.main.humidity;
-                    //console.log(humidity)
+                    ////console.log(humidity)
                     $("#humidity").text("Humidity: " + humidity + "%");
 
                     //WIND SPEED
                     let wind = response.wind.speed;
-                    //console.log(wind);
+                    ////console.log(wind);
                     $("#windspeed").text("Wind Speed: " + wind + " MPH");
 
                     //UV INDEX
                     let lon = response.coord.lon;
-                    //console.log(lon);
+                    ////console.log(lon);
                     let lat = response.coord.lat;
-                    //console.log(lat);
+                    ////console.log(lat);
                     let uvIndexURL = "https://api.openweathermap.org/data/2.5/uvi?appid=3e36a353a513c2197f90f8494af1060a&lat=" + lat + "&lon=" + lon;
-                    //console.log(uvIndexURL);
+                    ////console.log(uvIndexURL);
                     $("#uvIndex").text("UV Index: ");
 
-                    ////////////////////////////////////////////////////////////////////////////////////
                     //ADDING NEW BUTTON TO #cityHolder
                     for (i = 0; i < cityArray.length; i++) {
                         if (cityArray.includes(response.name) === false) {
                             cityArray.push(response.name)
                             let cityButton = $("<button type='button' class='btn btn-secondary btn-lg' style ='margin: 10px 10px 10px 0px' id = 'cityName'>").text(response.name);
                             $("#cityHolder").append(cityButton);
-                            console.log(cityArray);
+                            //console.log(cityArray);
 
                             $(cityButton).on("click", function () {
                                 cityButtonName = $(cityButton).text();
-                                console.log(cityButtonName);
+                                //console.log(cityButtonName);
                                 $("#cityInput").val(cityButtonName);
                                 //$("#cityInput").append(cityButtonName);
                                 getWeather();
                             });
                         };
                     };
-                    ///////////////////////////////////////////////////////////////////////////////////
+
 
                     //GETING UV AMOUNT
                     $.ajax({
@@ -172,9 +170,9 @@
                     }).then(function (response) {
 
                         let uvAmount = response.value;
-                        //console.log(uvAmount)
+                        ////console.log(uvAmount)
                         $("#uvAmount").text(uvAmount)
-                        //console.log("-------------------------")
+                        ////console.log("-------------------------")
 
                         if (uvAmount > 6) {
                             $("#uvAmount").css({ "background-color": "red", "font-weight": "bold" })
@@ -189,9 +187,9 @@
                         url: forecastURL,
                         method: "GET"
                     }).then(function (response) {
-                        //console.log(moment(response.list[3].dt_txt).format('LTS'))
-                        //console.log("-------------------------")
-                        //console.log(response.city.name);
+                        ////console.log(moment(response.list[3].dt_txt).format('LTS'))
+                        ////console.log("-------------------------")
+                        ////console.log(response.city.name);
 
                         for (let i = 0; i < 40; i++) {
 
@@ -206,8 +204,8 @@
                                 let forecastHour = moment(response.list[i].dt_txt).format('LTS');
                                 let ForecastHeader = $("<h3>").text(forecastDate);
                                 forecastDiv.append(ForecastHeader);
-                                //console.log(forecastDate);
-                                //console.log(forecastHour);
+                                ////console.log(forecastDate);
+                                ////console.log(forecastHour);
 
                                 // Establishing the forecast icon
                                 let forecastImageID = response.list[i].weather[0].icon;
@@ -215,8 +213,8 @@
                                 let forecastImageIcon = $("<img>").attr("src", forecastIconURL);
                                 forecastDiv.append(forecastImageIcon);
 
-                                //console.log("Image ID " + forecastImageID);
-                                //console.log(forecastIconURL);
+                                ////console.log("Image ID " + forecastImageID);
+                                ////console.log(forecastIconURL);
 
                                 // Establishing the forecast temperature
                                 let forecastKelvin = response.list[i].main.temp;
@@ -224,28 +222,21 @@
                                 let PTemp = $("<h5>").text("Temp: " + forecastTemp + "℉")
                                 forecastDiv.append(PTemp);
 
-                                //console.log(forecastTemp  + "℉");
+                                ////console.log(forecastTemp  + "℉");
 
                                 // Establishing the forecast humidity
                                 let forecastHumidity = response.list[i].main.humidity;
                                 let PHumidity = $("<h5>").text("Humidity: " + forecastHumidity + "%")
                                 forecastDiv.append(PHumidity);
 
-                                //console.log(forecastHumidity + "%");
+                                ////console.log(forecastHumidity + "%");
 
                                 // Appending the forecast div
                                 $("#forecastHolder").append(forecastDiv);
-                                //console.log("-------------------------")
-
-
+                                ////console.log("-------------------------")
                             };
-
                         };
-
                     });
-
-
-
                 });
             };
         });
