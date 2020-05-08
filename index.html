@@ -63,24 +63,26 @@
             <a class="btn btn-primary btn-lg" id="getWeatherBtn" href="#" role="button">Find City</a>
 
             <br>
-            <!--LIST OF SELECTED CITIES-->
+            <!--BUTTONS THAT ARE MADE FROM PRIOR SEARCHES GO HERE-->
             <section id="cityHolder"></section>
         </div>
 
         <br>
     </div>
     <footer class="footer">
-        <h3>Made by Levi Robischon (2020)</h3>
+        <h3>Created by Levi Robischon (2020)</h3>
         <p>Made possible by OpenWeather API</p>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
 
+        //CITY ARRAY TO PREVENT DUPLICATE CITY BUTTONS FROM BEING CREATED
         let cityArray = ["0"];
 
         //DISPLAYING CURRENT DATE
         $("#currentDate").text(moment().format("MMM Do YYYY"));
 
+        //CLICK FUNCTION FROM THE "FIND CITY" BUTTON
         $(document).ready(function () {
             //GET WEATHER FROM SEARCH "on click"
             $("#getWeatherBtn").on("click", function () {
@@ -88,12 +90,11 @@
             });
 
 
+            //GET WEATHER FUNCTION
             function getWeather() {
                 $("#forecastHolder").empty();
                 let cityInput = $("#cityInput").val();
-                let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
-                cityInput + "&appid=3e36a353a513c2197f90f8494af1060a";
-
+                let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&appid=3e36a353a513c2197f90f8494af1060a";
                 forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityInput + "&appid=3e36a353a513c2197f90f8494af1060a"
 
 //              AJAX    
@@ -101,9 +102,6 @@
                     url: queryURL,
                     method: "GET"
                 }).then(function (response) {
-
-                    // Create CODE HERE to log the resulting object
-                    ////console.log(response);
 
                     //CITY NAME
                     //console.log(response.name)
@@ -115,9 +113,9 @@
                     $("#currentWeatherImg").attr("src", "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
 
                     //WEATHER DESCRIPTION #currentWeatherDesc
-                    let weatherDesc = response.weather[0].description;
+                    //let weatherDesc = response.weather[0].description;
                     ////console.log(weatherDesc)
-                    $("#currentWeatherDesc").text(weatherDesc)
+                    //$("#currentWeatherDesc").text(weatherDesc)
 
                     //TEMPERATURE
                     let temp = response.main.temp;
@@ -144,25 +142,6 @@
                     ////console.log(uvIndexURL);
                     $("#uvIndex").text("UV Index: ");
 
-                    //ADDING NEW BUTTON TO #cityHolder
-                    for (i = 0; i < cityArray.length; i++) {
-                        if (cityArray.includes(response.name) === false) {
-                            cityArray.push(response.name)
-                            let cityButton = $("<button type='button' class='btn btn-secondary btn-lg' style ='margin: 10px 10px 10px 0px' id = 'cityName'>").text(response.name);
-                            $("#cityHolder").append(cityButton);
-                            //console.log(cityArray);
-
-                            $(cityButton).on("click", function () {
-                                cityButtonName = $(cityButton).text();
-                                //console.log(cityButtonName);
-                                $("#cityInput").val(cityButtonName);
-                                //$("#cityInput").append(cityButtonName);
-                                getWeather();
-                            });
-                        };
-                    };
-
-
                     //GETING UV AMOUNT
                     $.ajax({
                         url: uvIndexURL,
@@ -173,7 +152,7 @@
                         ////console.log(uvAmount)
                         $("#uvAmount").text(uvAmount)
                         ////console.log("-------------------------")
-
+                        // CITIES WITH A UV AMT ABOVE SIX WILL HAVE RED BACKGROUND
                         if (uvAmount > 6) {
                             $("#uvAmount").css({ "background-color": "red", "font-weight": "bold" })
                         }
@@ -196,13 +175,13 @@
                             //Creating Div to store the forecast information
                             let forecastDiv = $("<div class='forecastDiv'>");
 
-                            //If statement so that function only shows the forecast conditions on 3pm each day.
+                            //If statement so that function only shows the forecast conditions for 3pm each day.
                             if (moment(response.list[i].dt_txt).format('LTS') == "3:00:00 PM") {
 
                                 // Establishing the forecast date
                                 let forecastDate = moment(response.list[i].dt_txt).format('l');
                                 let forecastHour = moment(response.list[i].dt_txt).format('LTS');
-                                let ForecastHeader = $("<h3>").text(forecastDate);
+                                let ForecastHeader = $("<h4>").text(forecastDate);
                                 forecastDiv.append(ForecastHeader);
                                 ////console.log(forecastDate);
                                 ////console.log(forecastHour);
@@ -237,6 +216,26 @@
                             };
                         };
                     });
+
+                    $("#cityInput").val('');
+
+                    //ADDING NEW BUTTON TO #cityHolder
+                    for (i = 0; i < cityArray.length; i++) {
+                        if (cityArray.includes(response.name) === false) {
+                            cityArray.push(response.name)
+                            let cityButton = $("<button type='button' class='btn btn-secondary btn-lg' style ='margin: 10px 10px 10px 0px' id = 'cityName'>").text(response.name);
+                            $("#cityHolder").append(cityButton);
+                            //console.log(cityArray);
+
+                            $(cityButton).on("click", function () {
+                                cityButtonName = $(cityButton).text();
+                                //console.log(cityButtonName);
+                                $("#cityInput").val(cityButtonName);
+                                //$("#cityInput").append(cityButtonName);
+                                getWeather();
+                            });
+                        };
+                    };
                 });
             };
         });
