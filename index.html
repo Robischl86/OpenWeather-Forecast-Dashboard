@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
 
     <script src="moment.js"></script>
@@ -19,203 +27,230 @@
     </script>
 
     <title>Levi's Weather Dashboard</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <nav class="navbar navbar-light bg-light justify-content-center">
         <span>
-          <h1>Levi's Weather Dashboard</h1>
+            <h1>Levi's Weather Dashboard</h1>
         </span>
-      </nav>
-      <div class="container">
+    </nav>
+    <div class="container">
         <div class="jumbotron" style="border-style: solid; background-color: white;">
-          
-          <!--SECTION FOR CURRENT WEATHER-->
-          <section id="currentWeatherHolder">
-            <h3 id="currentDate"></h3>
-            <h2 class="display-4" id="cityName"></h2>
-            <img id="currentWeatherImg">
-            <p class="lead" id="currentWeatherDesc"></p>
-            <p class="lead" id="temperature"></p>
-            <p class="lead" id="humidity"></p>
-            <p class="lead" id="windspeed"></p>
-            <div class="lead" id="uvIndex" style="display: inline;"></div>
-            <div id="uvAmount" style="display: inline; border-radius: 5px; padding-left: 3px; padding-right: 3px;"></div>
-          </section>
 
-          <!--SECTION FOR FORECAST-->
-          <section id="forecastHolder"></section>
+            <!--SECTION FOR CURRENT WEATHER-->
+            <section id="currentWeatherHolder">
+                <h3 id="currentDate"></h3>
+                <h2 class="display-4" id="cityName"></h2>
+                <img id="currentWeatherImg">
+                <p class="lead" id="currentWeatherDesc"></p>
+                <p class="lead" id="temperature"></p>
+                <p class="lead" id="humidity"></p>
+                <p class="lead" id="windspeed"></p>
+                <div class="lead" id="uvIndex" style="display: inline;"></div>
+                <div id="uvAmount" style="display: inline; border-radius: 5px; padding-left: 3px; padding-right: 3px;">
+                </div>
+            </section>
 
-          <!--SEARCH FIELD-->
-          <hr class="my-4">
-          <p>Enter city name below to find its current weather and five-day forecast.</p>
-          <input class="form-control" id="cityInput" type="text" placeholder="City Name">
-          <br>
-          <a class="btn btn-primary btn-lg" id="getWeatherBtn" href="#" role="button">Find City</a>
+            <!--SECTION FOR FORECAST-->
+            <section id="forecastHolder"></section>
+
+            <!--SEARCH FIELD-->
+            <hr class="my-4">
+            <p>Enter city name below to find its current weather and five-day forecast.</p>
+            <input class="form-control" id="cityInput" type="text" placeholder="City Name">
+            <br>
+            <a class="btn btn-primary btn-lg" id="getWeatherBtn" href="#" role="button">Find City</a>
+
+            <br>
+            <!--LIST OF SELECTED CITIES-->
+            <section id="cityHolder"></section>
         </div>
 
         <br>
-      </div>
-      <footer class="footer">
+    </div>
+    <footer class="footer">
         <h3>Made by Levi Robischon (2020)</h3>
         <p>Made possible by OpenWeather API</p>
-      </footer>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-       <script type="text/javascript">
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
 
-//DISPLAYING CURRENT DATE
-$("#currentDate").text(moment().format("MMM Do YYYY"));
+        let cityArray = ["0"];
 
-$(document).ready(function(){
-//GET WEATHER FUNCTION "on click"
-$("#getWeatherBtn").on("click", function() {
+        //DISPLAYING CURRENT DATE
+        $("#currentDate").text(moment().format("MMM Do YYYY"));
 
-      $("#forecastHolder").empty();
-
-      let cityInput = $("#cityInput").val();
-      var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
-      cityInput + "&appid=3e36a353a513c2197f90f8494af1060a";
-      //console.log(queryURL)
-
-      let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityInput + "&appid=3e36a353a513c2197f90f8494af1060a"
-  
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(response) {
+        $(document).ready(function () {
+            //GET WEATHER FROM SEARCH "on click"
+            $("#getWeatherBtn").on("click", function () {
+                getWeather();
+            });
 
 
-        // Create CODE HERE to log the resulting object
-        //console.log(response);
-        
-        //CITY NAME
-        $("#cityName").text(response.name)
+            function getWeather() {
+                $("#forecastHolder").empty();
+                let cityInput = $("#cityInput").val();
+                let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
+                cityInput + "&appid=3e36a353a513c2197f90f8494af1060a";
 
-        //WEATHER ICON
-        let weatherIcon = response.weather[0].icon;
-        //console.log(weatherIcon);
-        $("#currentWeatherImg").attr("src", "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
+                forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityInput + "&appid=3e36a353a513c2197f90f8494af1060a"
 
 
-        //WEATHER DESCRIPTION #currentWeatherDesc
-        let weatherDesc = response.weather[0].description;
-        //console.log(weatherDesc)
-        $("#currentWeatherDesc").text(weatherDesc)
+//              AJAX    ////////////////////////////////////////////////////////////////////////////
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).then(function (response) {
 
-        //TEMPERATURE
-        let temp = response.main.temp;
-        let F = Math.round((temp - 273.15) * 1.80 + 32);
-        //console.log(F);
-        $("#temperature").text("Temperature: " + F + "℉");
+                    // Create CODE HERE to log the resulting object
+                    //console.log(response);
 
-        //HUMIDITY
-        let humidity = response.main.humidity;
-        //console.log(humidity)
-        $("#humidity").text("Humidity: " + humidity + "%");
+                    //CITY NAME
+                    console.log(response.name)
+                    $("#cityName").text(response.name)
 
-        //WIND SPEED
-        let wind = response.wind.speed;
-        //console.log(wind);
-        $("#windspeed").text("Wind Speed: " + wind + " MPH");
+                    //WEATHER ICON
+                    let weatherIcon = response.weather[0].icon;
+                    //console.log(weatherIcon);
+                    $("#currentWeatherImg").attr("src", "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png");
 
-        //UV INDEX
-        let lon = response.coord.lon;
-        //console.log(lon);
-        let lat = response.coord.lat;
-        //console.log(lat);
-        let uvIndexURL = "https://api.openweathermap.org/data/2.5/uvi?appid=3e36a353a513c2197f90f8494af1060a&lat=" + lat + "&lon=" + lon;
-        //console.log(uvIndexURL);
-        $("#uvIndex").text("UV Index: ");
+                    //WEATHER DESCRIPTION #currentWeatherDesc
+                    let weatherDesc = response.weather[0].description;
+                    //console.log(weatherDesc)
+                    $("#currentWeatherDesc").text(weatherDesc)
 
-        //GETING UV AMOUNT
-        $.ajax({
-          url: uvIndexURL,
-          method: "GET"
-        }).then(function(response) {
+                    //TEMPERATURE
+                    let temp = response.main.temp;
+                    let F = Math.round((temp - 273.15) * 1.80 + 32);
+                    //console.log(F);
+                    $("#temperature").text("Temperature: " + F + "℉");
 
-          let uvAmount = response.value;
-          //console.log(uvAmount)
-          $("#uvAmount").text(uvAmount)
-          //console.log("-------------------------")
+                    //HUMIDITY
+                    let humidity = response.main.humidity;
+                    //console.log(humidity)
+                    $("#humidity").text("Humidity: " + humidity + "%");
 
-          if (uvAmount > 6) {
-            $("#uvAmount").css({"background-color": "red", "font-weight": "bold"})
-          }
-          else {
-            $("#uvAmount").css({"background-color": "", "font-weight": "bold"})
-          }
+                    //WIND SPEED
+                    let wind = response.wind.speed;
+                    //console.log(wind);
+                    $("#windspeed").text("Wind Speed: " + wind + " MPH");
+
+                    //UV INDEX
+                    let lon = response.coord.lon;
+                    //console.log(lon);
+                    let lat = response.coord.lat;
+                    //console.log(lat);
+                    let uvIndexURL = "https://api.openweathermap.org/data/2.5/uvi?appid=3e36a353a513c2197f90f8494af1060a&lat=" + lat + "&lon=" + lon;
+                    //console.log(uvIndexURL);
+                    $("#uvIndex").text("UV Index: ");
+
+                    ////////////////////////////////////////////////////////////////////////////////////
+                    //ADDING NEW BUTTON TO #cityHolder
+                    for (i = 0; i < cityArray.length; i++) {
+                        if (cityArray.includes(response.name) === false) {
+                            cityArray.push(response.name)
+                            let cityButton = $("<button type='button' class='btn btn-secondary btn-lg' style ='margin: 10px 10px 10px 0px' id = 'cityName'>").text(response.name);
+                            $("#cityHolder").append(cityButton);
+                            console.log(cityArray);
+
+                            $(cityButton).on("click", function () {
+                                cityButtonName = $(cityButton).text();
+                                console.log(cityButtonName);
+                                $("#cityInput").val(cityButtonName);
+                                //$("#cityInput").append(cityButtonName);
+                                getWeather();
+                            });
+                        };
+                    };
+                    ///////////////////////////////////////////////////////////////////////////////////
+
+                    //GETING UV AMOUNT
+                    $.ajax({
+                        url: uvIndexURL,
+                        method: "GET"
+                    }).then(function (response) {
+
+                        let uvAmount = response.value;
+                        //console.log(uvAmount)
+                        $("#uvAmount").text(uvAmount)
+                        //console.log("-------------------------")
+
+                        if (uvAmount > 6) {
+                            $("#uvAmount").css({ "background-color": "red", "font-weight": "bold" })
+                        }
+                        else {
+                            $("#uvAmount").css({ "background-color": "", "font-weight": "bold" })
+                        }
+                    });
+
+                    //FORECAST API
+                    $.ajax({
+                        url: forecastURL,
+                        method: "GET"
+                    }).then(function (response) {
+                        //console.log(moment(response.list[3].dt_txt).format('LTS'))
+                        //console.log("-------------------------")
+                        //console.log(response.city.name);
+
+                        for (let i = 0; i < 40; i++) {
+
+                            //Creating Div to store the forecast information
+                            let forecastDiv = $("<div class='forecastDiv'>");
+
+                            //If statement so that function only shows the forecast conditions on 3pm each day.
+                            if (moment(response.list[i].dt_txt).format('LTS') == "3:00:00 PM") {
+
+                                // Establishing the forecast date
+                                let forecastDate = moment(response.list[i].dt_txt).format('l');
+                                let forecastHour = moment(response.list[i].dt_txt).format('LTS');
+                                let ForecastHeader = $("<h3>").text(forecastDate);
+                                forecastDiv.append(ForecastHeader);
+                                //console.log(forecastDate);
+                                //console.log(forecastHour);
+
+                                // Establishing the forecast icon
+                                let forecastImageID = response.list[i].weather[0].icon;
+                                let forecastIconURL = "https://openweathermap.org/img/wn/" + forecastImageID + "@2x.png";
+                                let forecastImageIcon = $("<img>").attr("src", forecastIconURL);
+                                forecastDiv.append(forecastImageIcon);
+
+                                //console.log("Image ID " + forecastImageID);
+                                //console.log(forecastIconURL);
+
+                                // Establishing the forecast temperature
+                                let forecastKelvin = response.list[i].main.temp;
+                                let forecastTemp = Math.round((forecastKelvin - 273.15) * 1.80 + 32);
+                                let PTemp = $("<h5>").text("Temp: " + forecastTemp + "℉")
+                                forecastDiv.append(PTemp);
+
+                                //console.log(forecastTemp  + "℉");
+
+                                // Establishing the forecast humidity
+                                let forecastHumidity = response.list[i].main.humidity;
+                                let PHumidity = $("<h5>").text("Humidity: " + forecastHumidity + "%")
+                                forecastDiv.append(PHumidity);
+
+                                //console.log(forecastHumidity + "%");
+
+                                // Appending the forecast div
+                                $("#forecastHolder").append(forecastDiv);
+                                //console.log("-------------------------")
+
+
+                            };
+
+                        };
+
+                    });
+
+
+
+                });
+            };
         });
 
-        //FORECAST API
-        $.ajax({
-          url: forecastURL,
-          method: "GET"
-        }).then(function(response) {
-          //console.log(moment(response.list[3].dt_txt).format('LTS'))
-          //console.log("-------------------------")
+    </script>
+</body>
 
-
-          for (let i = 0; i < 40; i++) {
-
-            //Creating Div to store the forecast information
-            let forecastDiv = $("<div class='forecastDiv'>");
-
-              //If statement so that function only shows the forecast conditions on 3pm each day.
-              if (moment(response.list[i].dt_txt).format('LTS') == "3:00:00 PM") {
-
-              // Establishing the forecast date
-              let forecastDate = moment(response.list[i].dt_txt).format('l');
-              let forecastHour = moment(response.list[i].dt_txt).format('LTS');
-              let ForecastHeader = $("<h3>").text(forecastDate);
-              forecastDiv.append(ForecastHeader);
-              //console.log(forecastDate);
-              //console.log(forecastHour);
-
-              // Establishing the forecast icon
-              let forecastImageID = response.list[i].weather[0].icon;
-              let forecastIconURL = "https://openweathermap.org/img/wn/" + forecastImageID + "@2x.png";
-              let forecastImageIcon = $("<img>").attr("src", forecastIconURL);
-              forecastDiv.append(forecastImageIcon);
-
-              //console.log("Image ID " + forecastImageID);
-              //console.log(forecastIconURL);
-
-              // Establishing the forecast temperature
-              let forecastKelvin = response.list[i].main.temp;
-              let forecastTemp = Math.round((forecastKelvin - 273.15) * 1.80 + 32);
-              let PTemp = $("<h5>").text("Temp: " + forecastTemp  + "℉")
-              forecastDiv.append(PTemp);
-
-              //console.log(forecastTemp  + "℉");
-
-              // Establishing the forecast humidity
-              let forecastHumidity = response.list[i].main.humidity;
-              let PHumidity = $("<h5>").text("Humidity: " + forecastHumidity + "%")
-              forecastDiv.append(PHumidity);
-
-              //console.log(forecastHumidity + "%");
-
-              // Appending the forecast div
-              $("#forecastHolder").append(forecastDiv);
-              //console.log("-------------------------")
-            
-
-          };
-
-        };
-
-        });
-
-
-        
-      });
-
-
-
-
-
-    });
-  });
-
-       </script>
-  </body>
 </html>
