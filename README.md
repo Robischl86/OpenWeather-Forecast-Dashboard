@@ -5,10 +5,11 @@ This project was created by Robischl86
  2. [Screenshot](#screenshot) 
  3. [Installation](#installation) 
  4. [Usage](#usage) 
- 5. [License](#license) 
- 6. [Contributors](#contributors) 
- 7. [Tests](#tests) 
- 8. [Questions](#questions) 
+ 5. [Contributors](#contributors) 
+ 6. [Tests](#tests) 
+ 7. [Questions](#questions)
+ 8. [License](#license)
+
 ## Description
 This is an HTML page that provides a city's current weather information and projected five-day forecasts. The application uses the OpenWeather API to display the current and five-day forecast weather information for any city that the user enters into the text field.
 ## Screenshot
