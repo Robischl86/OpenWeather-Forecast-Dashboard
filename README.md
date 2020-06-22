@@ -23,13 +23,13 @@ Enter the name of any recognized city in the OpenWeatherMap database and then cl
 ## Tests
 No tests required.
 ## Questions
-Q: How do I search for a city?
+Q: How do I search for a city?\
 A: Enter the name of any U.S. or international city into the search field at the bottom portion of the dashboard display.
 
-Q: What frameworks and/or API's were used in the development of this project?
+Q: What frameworks and/or API's were used in the development of this project?\
 A: The styling comes from the Bootstrap CSS library. The script uses moment.js to display dates and uses the JSON format of the OpenWeatherMap API's for Current Weather Data, 5 day Forecast, and UV Index.
 
-Q: What temperature scale can I view the results in?
+Q: What temperature scale can I view the results in?\
 A: For now, the only scale used in the temperature display is Fahrenheit.
 ## License
 MIT License
