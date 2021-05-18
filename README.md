@@ -5,10 +5,12 @@ This project was created by Robischl86
  2. [Screenshot](#screenshot) 
  3. [Installation](#installation) 
  4. [Usage](#usage) 
- 5. [License](#license) 
- 6. [Contributors](#contributors) 
- 7. [Tests](#tests) 
- 8. [Questions](#questions) 
+ 5. [Contributors](#contributors) 
+ 6. [Tests](#tests) 
+ 7. [License](#license)
+ 8. [Questions](#questions)
+ 
+
 ## Description
 This is an HTML page that provides a city's current weather information and projected five-day forecasts. The application uses the OpenWeather API to display the current and five-day forecast weather information for any city that the user enters into the text field.  
 [Link](https://robischl86.github.io/OpenWeather-Forecast-Dashboard/)
@@ -23,13 +25,13 @@ Enter the name of any recognized city in the OpenWeatherMap database and then cl
 ## Tests
 No tests required.
 ## Questions
-Q: How do I search for a city?
+Q: How do I search for a city?\
 A: Enter the name of any U.S. or international city into the search field at the bottom portion of the dashboard display.
 
-Q: What frameworks and/or API's were used in the development of this project?
+Q: What frameworks and/or API's were used in the development of this project?\
 A: The styling comes from the Bootstrap CSS library. The script uses moment.js to display dates and uses the JSON format of the OpenWeatherMap API's for Current Weather Data, 5 day Forecast, and UV Index.
 
-Q: What temperature scale can I view the results in?
+Q: What temperature scale can I view the results in?\
 A: For now, the only scale used in the temperature display is Fahrenheit.
 ## License
 MIT License
@@ -41,6 +43,12 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 3cb1075ad4cca4d3be7491ce6458fb58413c4dd4
 
 
 
