@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Levi's Weather Dashboard
 This project was created by Robischl86
 ## Table of Contents
@@ -11,7 +10,8 @@ This project was created by Robischl86
  7. [Tests](#tests) 
  8. [Questions](#questions) 
 ## Description
-This is an HTML page that provides a city's current weather information and projected five-day forecasts. The application uses the OpenWeather API to display the current and five-day forecast weather information for any city that the user enters into the text field.
+This is an HTML page that provides a city's current weather information and projected five-day forecasts. The application uses the OpenWeather API to display the current and five-day forecast weather information for any city that the user enters into the text field.  
+[Link](https://robischl86.github.io/OpenWeather-Forecast-Dashboard/)
 ## Screenshot
 ![Screenshot](screenshot.png?raw=true) 
 ## Installation
@@ -41,11 +41,6 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-=======
-# OpenWeather-Forecast-Dashboard
-This is a weather dashboard that pulls data from the OpenWeather API and displays current weather information and five-day forecast for any city. I started this assignment by filling out the HTML and determining the id's attached to specific tags.
-I then created the getWeather() function, which would be triggered by the #getWeatherBtn.
->>>>>>> 9258eb731a52e91084790da2ad68b9c3c40a704a
 
 
 
